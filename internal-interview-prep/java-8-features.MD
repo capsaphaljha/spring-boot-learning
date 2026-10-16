@@ -1,4 +1,4 @@
-# Java 8 Features Tutorial
+# Java 8 Features
   - Java 8 is one of the most important releases in the history of Java.
   - Released on March 18, 2014, it introduced several major language and library enhancements that made Java programming more concise, expressive, and suitable for functional-style programming.
   - The most significant Java 8 features include Lambda Expressions, Functional Interfaces, Method References, Stream API, the Optional class, the new Date and Time API, and enhancements to interfaces and collections.
@@ -8,4 +8,35 @@
 ### Default and static methods in interfaces for greater flexibility.
 
 
+The following feature enhanced in Java ersion 8:
 
+- Lambda Expressions
+- Method References
+- Functional Interfaces
+- Optional Class
+- ForEach() Method
+- Date/Time API
+- Static Methods in Interface
+- IO Enhancements
+- Type and Repeating Annotations
+- Stream API
+- Default Methods
+- Base64 Encode Decode
+- Collectors Class
+- Nashorn JavaScript Engine
+- Parallel Array Sorting
+- Concurrency Enhancements
+- JDBC Enhancements
+- String Joiner
+- Stream Filter
+- Security Enhancements
+- Tools Enhancements
+- Pack200 Enhancements
+- Networking Enhancements
+- API for XML processing (JAXP) 1.6 Enhancement
+- Java Virtual Machine Enhancements
+- Java Mission Control 5.3
+- Internationalization Enhancements
+- Adoption of Unicode CLDR
+- New Calendar and Locale APIs
+- Version Enhancements
