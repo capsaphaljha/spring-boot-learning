@@ -11,16 +11,23 @@
 The following feature enhanced in Java ersion 8:
 
 - Lambda Expressions
-- Method References
 - Functional Interfaces
+- Default Methods in Interface
+- Static Methods in Interface
+- Predefined Functional Interfaces
+  - Predicates
+  - Functions
+  - Consumer
+  - Supplier
+- Double colon operator (::)
+- Stream API
+- Stream Filter
+- Date/Time API (JODA API)
+- Method References
 - Optional Class
 - ForEach() Method
-- Date/Time API
-- Static Methods in Interface
 - IO Enhancements
 - Type and Repeating Annotations
-- Stream API
-- Default Methods
 - Base64 Encode Decode
 - Collectors Class
 - Nashorn JavaScript Engine
@@ -28,7 +35,6 @@ The following feature enhanced in Java ersion 8:
 - Concurrency Enhancements
 - JDBC Enhancements
 - String Joiner
-- Stream Filter
 - Security Enhancements
 - Tools Enhancements
 - Pack200 Enhancements
