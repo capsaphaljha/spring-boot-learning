@@ -62,7 +62,19 @@ If an interface overrides any public method from the java.lang.Object class (lik
 
 NOTE: a Functional Interface can extend another interface. The golden rule is that after inheritance, the child interface must contain exactly one abstract method. If it inherits one and declares another, it violates the Single Abstract Method (SAM) rule and ceases to be a Functional Interface."
 
+### Default Methods 
+- A default method is a method inside an interface that has a method body and is defined using the default keyword. Introduced in Java 8, its primary purpose is to allow developers to add new methods to existing interfaces without breaking the classes that already implement those interfaces. This ensures backward compatibility while enabling structural evolution.
+•  Can be overridden | Called using the object of the implementing class (obj.defaultMethod()).
+
+### 
+Static Methods
+- A static method in an interface is a method that has a concrete implementation and is defined using the static keyword. Similar to static methods in a class, these methods belong to the interface itself and cannot be overridden by implementing classes. They are invoked directly using the interface name and are used to provide utility or helper functionality relevant to the interface.
+• Static Methods: Cannot be overridden | Called directly using the Interface name (InterfaceName.staticMethod()).
+
+
 ## Default Methods in Interface
+
+
 ## Static Methods in Interface
 ## Predefined Functional Interfaces
   - Predicates
