@@ -11,6 +11,43 @@
 The following feature enhanced in Java ersion 8:
 
 ## Lambda Expressions
+## Functional Interfaces
+## Default Methods in Interface
+## Static Methods in Interface
+## Predefined Functional Interfaces
+  - Predicates
+  - Functions
+  - Consumer
+  - Supplier
+## Double colon operator (::)
+## Stream API
+## Stream Filter
+## Date/Time API (JODA API)
+## Method References
+## Optional Class
+## ForEach() Method
+## IO Enhancements
+## Type and Repeating Annotations
+## Base64 Encode Decode
+## Collectors Class
+## Nashorn JavaScript Engine
+## Parallel Array Sorting
+## Concurrency Enhancements
+## JDBC Enhancements
+## String Joiner
+## Security Enhancements
+## Tools Enhancements
+## Pack200 Enhancements
+## Networking Enhancements
+## API for XML processing (JAXP) 1.6 Enhancement
+## Java Virtual Machine Enhancements
+## Java Mission Control 5.3
+## Internationalization Enhancements
+## Adoption of Unicode CLDR
+## New Calendar and Locale APIs
+## Version Enhancements
+
+## Lambda Expressions
   - A Lambda Expression in Java is an anonymous function,  a function without a name, return type, or access modifier, that provides a clear and concise way to implement a Functional Interface.
 Introduced in Java 8, it enables functional programming by allowing you to pass behavior as an argument into methods, significantly reducing boilerplate code.
 
