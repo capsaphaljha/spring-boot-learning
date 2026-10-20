@@ -250,8 +250,115 @@ public class MethodReferenceDemo {
 
 <a id="stream-api"></a>
 ## Stream API
+- Stream API is a sequence of elements supporting functional and declarative operations. 
+- It allows us to process collections of data in a pipeline format without changing the original data source.
+- It uses internal iteration, meaning the framework handles the looping, allowing us to focus purely on what operations to perform using intermediate methods like filter() and map(), and a terminal method like collect() or forEach()."
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class StreamInterviewExample {
+    public static void main(String[] args) {
+        
+        // 1. Data Source: Original list of integers
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        // 2. Stream Pipeline Creation
+        List<Integer> squaredEvenNumbers = numbers.stream()
+            
+            // Intermediate Operation 1: filter()
+            // Lambda expression ka use karke sirf even numbers ko aage bhej rahe hain
+            .filter(n -> n % 2 == 0) // Bachenge: [2, 4, 6]
+            
+            // Intermediate Operation 2: map()
+            // Har even number ko uske square se replace kar rahe hain
+            .map(n -> n * n) // Ho jayenge: [4, 16, 36]
+            
+            // Terminal Operation: collect()
+            // Stream ko wapas ek List mein convert kar rahe hain (Yeh pipeline trigger karta hai)
+            .collect(Collectors.toList());
+
+        // Result print karna
+        System.out.println("Squared Even Numbers: " + squaredEvenNumbers); 
+        // Output: [4, 16, 36]
+    }
+}
+
+```
+Parallel Processing (Sabse Bada Advantage)
+- Agar aapke paas millions of records hain, toh Stream API aapko bina koi complex multithreading code likhe, data ko parallel process karne ki taqat deta hai.
+- Aapko bas .stream() ki jagah .parallelStream() likhna hota hai.
+- Java ka JVM khud-b-khud aapke computer ke multiple CPU cores par kaam baant deta hai.
+- Loop mein agar aapko yeh karna pade, toh aapko khud threads aur synchronization likhni padegi jo ki bahut mushkil hota hai.
+
 <a id="stream-filter"></a>
 ## Stream Filter
+
+The filter() method is an intermediate stream operation that accepts a Predicate<T> functional interface and returns a new stream containing only the elements that match the given condition. Advanced usage involves combining multiple conditions using Predicate.and() or Predicate.or() for reusability, ensuring the filter logic remains strictly stateless (especially for parallel streams), and leveraging lazy evaluation for short-circuiting performance.
+
+```java
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+class Employee {
+    String name;
+    String department;
+    double salary;
+
+    public Employee(String name, String department, double salary) {
+        this.name = name;
+        this.department = department;
+        this.salary = salary;
+    }
+
+    public String getDepartment() { return department; }
+    public double getSalary() { return salary; }
+    public String getName() { return name; }
+}
+
+public class AdvancedFilterExample {
+    public static void main(String[] args) {
+        
+        // 1. Data Source (Kuch null values ke sath)
+        List<Employee> employees = Arrays.asList(
+            new Employee("Aman", "IT", 75000),
+            null, // Null object jo NullPointerException de sakta hai
+            new Employee("Rahul", "HR", 45000),
+            new Employee("Ankit", "IT", 90000),
+            new Employee("Neha", "IT", 60000)
+        );
+
+        // 2. Advanced Predicates banana (Reusability ke liye)
+        // Condition 1: Employee null nahi hona chahiye
+        Predicate<Employee> isNotNull = Objects::nonNull;
+
+        // Condition 2: Department "IT" hona chahiye
+        Predicate<Employee> isITDept = e -> e.getDepartment().equals("IT");
+
+        // Condition 3: Salary 70,000 se zyada honi chahiye
+        Predicate<Employee> isHighEarner = e -> e.getSalary() > 70000;
+
+        // 3. Predicates ko combine karna (.and() ka use karke) aur Filter lagana
+        List<String> eliteITEmployees = employees.stream()
+            .filter(isNotNull) // Pehle null hata diya taaki NPE na aaye
+            .filter(isITDept.and(isHighEarner)) // Advanced: Multiple predicates ko combine kiya
+            .map(Employee::getName) // Sirf names nikal liye
+            .collect(Collectors.toList()); // Terminal operation
+
+        // Result print karna
+        System.out.println("Elite IT Employees: " + eliteITEmployees); 
+        // Output: [Aman, Ankit]
+    }
+}
+
+```
+
+
 <a id="date-time-api-joda-api"></a>
 ## Date/Time API (JODA API)
 <a id="method-references"></a>
