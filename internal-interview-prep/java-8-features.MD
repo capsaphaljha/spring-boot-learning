@@ -112,17 +112,142 @@ NOTE: a Functional Interface can extend another interface. The golden rule is th
 <a id="default-methods-in-interface"></a>
 ## Default Methods in Interface
 
+- A default method is a method inside an interface that has a method body and is defined using the default keyword. Introduced in Java 8, its primary purpose is to allow developers to add new methods to existing interfaces without breaking the classes that already implement those interfaces. This ensures backward compatibility while enabling structural evolution.
+•  Can be overridden | Called using the object of the implementing class (obj.defaultMethod()).
+
 
 <a id="static-methods-in-interface"></a>
 ## Static Methods in Interface
+- A static method in an interface is a method that has a concrete implementation and is defined using the static keyword. Similar to static methods in a class, these methods belong to the interface itself and cannot be overridden by implementing classes. They are invoked directly using the interface name and are used to provide utility or helper functionality relevant to the interface.
+• Static Methods: Cannot be overridden | Called directly using the Interface name (InterfaceName.staticMethod()).
+
+
 <a id="predefined-functional-interfaces"></a>
 ## Predefined Functional Interfaces
   - Predicates
   - Functions
   - Consumer
   - Supplier
+
+- Java 8 provides these ready-made interfaces so that you don't have to create custom interfaces every time you write a Lambda expression.
+
+### Predicates -  A Predicate represents a boolean-valued function of one argument. It is strictly used for conditional checking or filtering.
+• Abstract Method: boolean test(T t)
+• Input: Takes one argument of type T.
+• Output: Always returns a boolean (true or false).
+• Interview Definition: "A Predicate is a functional interface that takes an input object, evaluates a condition on it, and returns a boolean value. It is widely used in filtering data streams."
+
+Example: 
+
+```java
+import java.util.function.Predicate;
+
+public class PredicateDemo {
+    public static void main(String[] args) {
+        // Lambda to check if a string length is greater than 5
+        Predicate<String> isLongString = str -> str.length() > 5;
+
+        // Calling the abstract method 'test()'
+        System.out.println(isLongString.test("Java"));       // Output: false
+        System.out.println(isLongString.test("Functional")); // Output: true
+    }
+}
+
+```
+
+### Functions - A Function represents an operation that accepts one argument and produces a result. It is used for transforming or mapping data from one type to another.
+• Abstract Method: R apply(T t)
+• Input: Takes one argument of type T.
+• Output: Returns a result of type R (can be the same type or a totally different type).
+• Interview Definition: "A Function interface is used for data transformation. It accepts an argument of type T, processes it, and maps it to a return value of type R."
+
+```java
+import java.util.function.Function;
+
+public class FunctionDemo {
+    public static void main(String[] args) {
+        // Lambda to convert a String into an Integer (calculates length)
+        // Takes String (T), Returns Integer (R)
+        Function<String, Integer> stringLength = str -> str.length();
+
+        // Calling the abstract method 'apply()'
+        System.out.println(stringLength.apply("Interview")); // Output: 9
+    }
+}
+```
+
+### Consumer - A Consumer represents an operation that accepts a single input argument and returns no result. It is used when you want to consume, modify, or print data without returning anything.
+• Abstract Method: void accept(T t)
+• Input: Takes one argument of type T.
+• Output: Returns void (Nothing).
+• Interview Definition: "A Consumer is a functional interface that accepts a single input to perform an operation, such as printing or saving to a database, without returning any result."
+
+```java
+import java.util.function.Consumer;
+
+public class ConsumerDemo {
+    public static void main(String[] args) {
+        // Lambda to print a message in uppercase
+        Consumer<String> upperPrinter = str -> System.out.println(str.toUpperCase());
+
+        // Calling the abstract method 'accept()'
+        upperPrinter.accept("hello java"); // Output: HELLO JAVA
+    }
+}
+```
+
+
+# Supplier - A Supplier represents a supplier of results. It does not accept any arguments but produces a value. It is primarily used for lazy generation or creation of objects.
+• Abstract Method: T get()
+• Input: Takes no arguments.
+• Output: Returns a value of type T.
+• Interview Definition: "A Supplier takes no input arguments but supplies a value of a specified type. It is commonly used for generating random values, current timestamps, or factory patterns."
+example:
+
+```java
+import java.util.function.Supplier;
+
+public class SupplierDemo {
+    public static void main(String[] args) {
+        // Lambda to generate a random decimal value
+        Supplier<Double> randomValue = () -> Math.random();
+
+        // Calling the abstract method 'get()'
+        System.out.println(randomValue.get()); // Output: A random number (e.g., 0.6542...)
+    }
+}
+```
+*** Lazy Initialization
+
+
 <a id="double-colon-operator"></a>
 ## Double colon operator (::)
+
+- The Double Colon Operator (::) in Java is known as a Method Reference. It is a syntactical shortcut for a lambda expression that solely invokes an existing method. It makes the code more readable and compact by referencing methods directly by their names without executing them or passing explicit arguments.
+
+```java
+
+import java.util.Arrays;
+import java.util.List;
+
+public class MethodReferenceDemo {
+    public static void main(String[] args) {
+        List<String> names = Arrays.asList("Amit", "Rahul", "Priya");
+
+        // Tarika 1: Normal Lambda Expression
+        System.out.println("--- Using Lambda ---");
+        names.forEach(name -> System.out.println(name));
+
+        // Tarika 2: Using Double Colon Operator (Method Reference)
+        System.out.println("--- Using Method Reference ---");
+        names.forEach(System.out::println);
+    }
+}
+
+
+```
+
+
 <a id="stream-api"></a>
 ## Stream API
 <a id="stream-filter"></a>
