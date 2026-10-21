@@ -416,6 +416,29 @@ public class DateTimeInterviewExample {
 <a id="method-references"></a>
 ## Method References
 
+A Method Reference in Java 8 is a feature that provides a highly readable and compact way to refer to an existing method without executing it. It acts as a shorthand syntax for a Lambda Expression that only calls a single, predefined method. Identified by the double colon (::) operator, it enhances code readability and promotes the reuse of existing logic by mapping directly to a functional interface
+
+like below
+• Lambda: (a, b) -> Integer.compare(a, b)
+• Method Reference: Integer::compare
+
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class MethodRefDemo {
+    public static void main(String[] args) {
+        List<String> frameworkList = Arrays.asList("Spring", "Hibernate", "Struts");
+
+        // 1. Standard Lambda Expression approach
+        frameworkList.forEach(name -> System.out.println(name));
+
+        // 2. Optimized Method Reference approach (Cleaner & Professional)
+        frameworkList.forEach(System.out::println);
+    }
+}
+```
 
 <a id="optional-class"></a>
 ## Optional Class
