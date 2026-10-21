@@ -416,13 +416,79 @@ public class DateTimeInterviewExample {
 <a id="method-references"></a>
 ## Method References
 
+A Method Reference in Java 8 is a feature that provides a highly readable and compact way to refer to an existing method without executing it. It acts as a shorthand syntax for a Lambda Expression that only calls a single, predefined method. Identified by the double colon (::) operator, it enhances code readability and promotes the reuse of existing logic by mapping directly to a functional interface
+
+like below
+• Lambda: (a, b) -> Integer.compare(a, b)
+• Method Reference: Integer::compare
+
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class MethodRefDemo {
+    public static void main(String[] args) {
+        List<String> frameworkList = Arrays.asList("Spring", "Hibernate", "Struts");
+
+        // 1. Standard Lambda Expression approach
+        frameworkList.forEach(name -> System.out.println(name));
+
+        // 2. Optimized Method Reference approach (Cleaner & Professional)
+        frameworkList.forEach(System.out::println);
+    }
+}
+```
 
 <a id="optional-class"></a>
 ## Optional Class
 
+The Optional<T> class in Java 8 is a container object introduced in the java.util package to represent the presence or absence of a non-null value.
+It was primarily designed to reduce the risk of NullPointerException (NPE) and to encourage developers to design cleaner APIs without explicitly returning or checking for null.
+It forces the calling code to consciously handle the case where a value might be missing, leading to more robust and readable code.
+
+Without optinal class you get an error
+```java 
+public String getUserEmail(String userId) {
+    User user = database.find(userId); 
+    return user.getEmail(); // If user is null, this throws NullPointerException!
+}
+```
+
+with optional class there will not be any error:
+
+```java 
+import java.util.Optional;
+
+public Optional<String> getUserEmail(String userId) {
+    User user = database.find(userId);
+    
+    // Returns an empty Optional box if user/email is null, otherwise wraps the email
+    return Optional.ofNullable(user != null ? user.getEmail() : null);
+}
+```
 
 <a id="foreach-method"></a>
 ## ForEach() Method
+
+The forEach() method, introduced in Java 8, is a terminal operation defined in the Iterable interface and the Stream interface. It provides a functional approach to iterate over a collection or a stream by accepting a Consumer functional interface as an argument. Unlike traditional for or foreach loops, it abstracts the internal iteration mechanism, allowing Java to optimize data traversal and making the code highly concise and readable.
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class ForEachListDemo {
+    public static void main(String[] args) {
+        List<String> javaFeatures = Arrays.asList("Lambda", "Streams", "Optional", "forEach");
+
+        // 1. Using Lambda Expression
+        javaFeatures.forEach(feature -> System.out.println("Feature: " + feature));
+
+        // 2. Combining with Method Reference (Cleaner approach)
+        javaFeatures.forEach(System.out::println);
+    }
+}
+```
 
 
 <a id="io-enhancements"></a>
