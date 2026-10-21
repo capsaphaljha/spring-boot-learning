@@ -471,6 +471,25 @@ public Optional<String> getUserEmail(String userId) {
 <a id="foreach-method"></a>
 ## ForEach() Method
 
+The forEach() method, introduced in Java 8, is a terminal operation defined in the Iterable interface and the Stream interface. It provides a functional approach to iterate over a collection or a stream by accepting a Consumer functional interface as an argument. Unlike traditional for or foreach loops, it abstracts the internal iteration mechanism, allowing Java to optimize data traversal and making the code highly concise and readable.
+
+```java
+import java.util.Arrays;
+import java.util.List;
+
+public class ForEachListDemo {
+    public static void main(String[] args) {
+        List<String> javaFeatures = Arrays.asList("Lambda", "Streams", "Optional", "forEach");
+
+        // 1. Using Lambda Expression
+        javaFeatures.forEach(feature -> System.out.println("Feature: " + feature));
+
+        // 2. Combining with Method Reference (Cleaner approach)
+        javaFeatures.forEach(System.out::println);
+    }
+}
+```
+
 
 <a id="io-enhancements"></a>
 ## IO Enhancements
