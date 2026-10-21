@@ -443,6 +443,30 @@ public class MethodRefDemo {
 <a id="optional-class"></a>
 ## Optional Class
 
+The Optional<T> class in Java 8 is a container object introduced in the java.util package to represent the presence or absence of a non-null value.
+It was primarily designed to reduce the risk of NullPointerException (NPE) and to encourage developers to design cleaner APIs without explicitly returning or checking for null.
+It forces the calling code to consciously handle the case where a value might be missing, leading to more robust and readable code.
+
+Without optinal class you get an error
+```java 
+public String getUserEmail(String userId) {
+    User user = database.find(userId); 
+    return user.getEmail(); // If user is null, this throws NullPointerException!
+}
+```
+
+with optional class there will not be any error:
+
+```java 
+import java.util.Optional;
+
+public Optional<String> getUserEmail(String userId) {
+    User user = database.find(userId);
+    
+    // Returns an empty Optional box if user/email is null, otherwise wraps the email
+    return Optional.ofNullable(user != null ? user.getEmail() : null);
+}
+```
 
 <a id="foreach-method"></a>
 ## ForEach() Method
