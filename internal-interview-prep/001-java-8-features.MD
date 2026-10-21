@@ -361,30 +361,106 @@ public class AdvancedFilterExample {
 
 <a id="date-time-api-joda-api"></a>
 ## Date/Time API (JODA API)
+
+The Java 8 Date and Time API (java.time), heavily inspired by Joda-Time, provides a modern, immutable, and thread-safe way to handle date and time operations.
+Unlike the legacy java.util.Date which was mutable and had confusing indexing, the new API introduces clear domain-specific classes like LocalDate, LocalTime, and LocalDateTime along with powerful tools for parsing, formatting, and calculating intervals using Period and Duration.
+
+LocalDate: Sirf date ke liye (e.g., 2026-10-20). Isme time nahi hota.
+
+LocalTime: Sirf time ke liye (e.g., 14:30:00). Isme date nahi hoti.
+
+LocalDateTime: Date aur Time dono ke liye, bina kisi timezone ke (e.g., 2026-10-20T14:30:00).
+
+ZonedDateTime: Date, Time, aur Timezone ke sath (e.g., IST, UTC).
+
+Period & Duration: Do dates ya times ke beech ka difference nikalne ke liye.
+
+```java
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+
+public class DateTimeInterviewExample {
+    public static void main(String[] args) {
+        
+        // 1. Current Date aur Time lena
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        
+        System.out.println("Current Date: " + currentDate);
+        System.out.println("Current Time: " + currentTime);
+
+        // 2. Date manipulation (Jaise 5 din aage ki date nikalna)
+        LocalDate futureDate = currentDate.plusDays(5);
+        System.out.println("Date after 5 days: " + futureDate);
+
+        // 3. Do Dates ke beech ka difference (Period ka use karke)
+        LocalDate birthDate = LocalDate.parse("2000-05-15");
+        LocalDate today = LocalDate.now();
+        
+        Period age = Period.between(birthDate, today);
+        System.out.println("Age: " + age.getYears() + " years");
+
+        // 4. Date Formatting (Apne marzi ke format mein convert karna)
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDateTime = currentDateTime.format(formatter);
+        
+        System.out.println("Formatted Date-Time: " + formattedDateTime);
+    }
+}
+```
+
 <a id="method-references"></a>
 ## Method References
+
+
 <a id="optional-class"></a>
 ## Optional Class
+
+
 <a id="foreach-method"></a>
 ## ForEach() Method
+
+
 <a id="io-enhancements"></a>
 ## IO Enhancements
+
+
 <a id="type-and-repeating-annotations"></a>
 ## Type and Repeating Annotations
+
+
 <a id="base64-encode-decode"></a>
 ## Base64 Encode Decode
+
+
 <a id="collectors-class"></a>
 ## Collectors Class
+
+
 <a id="nashorn-javascript-engine"></a>
 ## Nashorn JavaScript Engine
+
+
 <a id="parallel-array-sorting"></a>
 ## Parallel Array Sorting
+
+
 <a id="concurrency-enhancements"></a>
 ## Concurrency Enhancements
+
+
 <a id="jdbc-enhancements"></a>
 ## JDBC Enhancements
+
+
 <a id="string-joiner"></a>
 ## String Joiner
+
+
 <a id="security-enhancements"></a>
 ## Security Enhancements
 <a id="tools-enhancements"></a>
