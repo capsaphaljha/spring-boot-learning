@@ -493,18 +493,156 @@ public class ForEachListDemo {
 
 <a id="io-enhancements"></a>
 ## IO Enhancements
+- Java 8 introduced significant IO Enhancements by bridging the gap between the standard java.io / java.nio packages and the newly introduced Stream API. Key updates include additions to the java.nio.file.Files class, such as Files.lines(), Files.walk(), and Files.find(). These methods return lazily-populated streams of lines or file paths, allowing developers to read, filter, and process large files and directory trees efficiently with minimal memory overhead.
+
+NOTE: Before, when java loading large file there was an error OutOfMemoryError but now it read line by line
+
+```java
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.stream.Stream;
+
+public class IOReadDemo {
+    public static void main(String[] args) {
+        String filePath = "app.log";
+
+        // Try-with-resources automatically closes the stream and file handle
+        try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
+            
+            // Filter error logs and print them efficiently
+            lines.filter(line -> line.contains("ERROR"))
+                 .forEach(System.out::println);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+- difference between Files.list() and Files.walk()?
+Files.list() sirf immediate directory items ko lazy stream me fetch karta hai (Non-recursive).
+Jabki Files.walk() deep down poore folder structure ko traverse karta hai (Recursive traversal).
 
 
 <a id="type-and-repeating-annotations"></a>
 ## Type and Repeating Annotations
 
+- Type Annotations (JSR 308) allow annotations to be applied anywhere a type is used—such as during object creation, type casting, or generic type arguments—enabling stronger compile-time type checking.
+- Repeating Annotations allow the same annotation type to be applied multiple times to a single code element, eliminating the need to manually wrap them inside a container annotation, which results in cleaner and more readable code.
+
+
+Example 1: Type Annotations (Usage places)
+
+```java
+
+import java.util.List;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+
+// Defining a custom type annotation
+@Target(ElementType.TYPE_USE) // Crucial: TYPE_USE allows it everywhere
+@interface NonEmpty {}
+
+public class TypeAnnotationDemo {
+    public static void main(String[] args) {
+        // 1. With Object Creation
+        Object myObject = new @NonEmpty String("Java 8");
+
+        // 2. With Type Casting
+        String str = (@NonEmpty String) myObject;
+
+        // 3. With Generic Type Arguments
+        List<@NonEmpty String> names;
+    }
+}
+```
+
+```java
+Example 2: Repeating Annotations (The Modern Way)
+
+import java.lang.annotation.Repeatable;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+// Step 1: Create the Container Annotation
+@Retention(RetentionPolicy.RUNTIME)
+@interface Roles {
+    Role[] value(); // This holds the array of repeating annotations
+}
+
+// Step 2: Create the actual annotation and link it to the container
+@Repeatable(Roles.class)
+@Retention(RetentionPolicy.RUNTIME)
+@interface Role {
+    String value();
+}
+
+// Step 3: Apply it multiple times cleanly!
+@Role("ADMIN")
+@Role("MANAGER")
+public class EmployeeDashboard {
+    // Code logic here
+}
+
+```
+
 
 <a id="base64-encode-decode"></a>
 ## Base64 Encode Decode
+Prior to Java 8, developers had to rely on unsupported internal classes like sun.misc.BASE64Encoder or external libraries like Apache Commons Codec to handle Base64 operations.
+Java 8 introduced a standardized, highly optimized utility class called java.util.Base64.
+This class provides static factory methods to obtain three distinct types of encoders and decoders: Basic, URL-safe, and MIME.
+It allows binary data to be safely converted into a printable ASCII string format and back, ensuring safe data transmission across text-based protocols.
+
+```java 
+import java.util.Base64;
+import java.nio.charset.StandardCharsets;
+
+public class Base64Demo {
+    public static void main(String[] args) {
+        String originalText = "Java 8 Features & Enhancements!";
+        
+        // ==========================================
+        // 1. BASIC ENCODER & DECODER
+        // ==========================================
+        // Encoding
+        String basicEncoded = Base64.getEncoder().encodeToString(originalText.getBytes(StandardCharsets.UTF_8));
+        System.out.println("Basic Encoded: " + basicEncoded);
+        
+        // Decoding
+        byte[] decodedBytes = Base64.getDecoder().decode(basicEncoded);
+        String basicDecoded = new String(decodedBytes, StandardCharsets.UTF_8);
+        System.out.println("Basic Decoded: " + basicDecoded);
+
+
+        // ==========================================
+        // 2. URL SAFE ENCODER & DECODER
+        // ==========================================
+        String urlWithSpecialChars = "https://mywebsite.com";
+        
+        // Encoding (Replaces '/' and '+' cleanly)
+        String urlEncoded = Base64.getUrlEncoder().encodeToString(urlWithSpecialChars.getBytes(StandardCharsets.UTF_8));
+        System.out.println("URL Safe Encoded: " + urlEncoded);
+        
+        // Decoding
+        byte[] urlDecodedBytes = Base64.getUrlDecoder().decode(urlEncoded);
+        String urlDecoded = new String(urlDecodedBytes, StandardCharsets.UTF_8);
+        System.out.println("URL Safe Decoded: " + urlDecoded);
+    }
+}
+```
 
 
 <a id="collectors-class"></a>
 ## Collectors Class
+- 
+The Collectors class in Java 8 is a final utility class located in the java.util.stream package.
+It consists exclusively of static factory methods that return a Collector implementation.
+These collectors are primarily used as arguments in a Stream's terminal .collect() operation to perform mutable reduction operations—such as accumulating elements into collections (like Lists, Sets, or Maps), concatenating strings, partitioning data, or grouping elements based on complex classification functions.
+
 
 
 <a id="nashorn-javascript-engine"></a>
@@ -587,23 +725,33 @@ public class CompletableFutureExample {
 
 <a id="security-enhancements"></a>
 ## Security Enhancements
+
 <a id="tools-enhancements"></a>
 ## Tools Enhancements
+
 <a id="pack200-enhancements"></a>
 ## Pack200 Enhancements
+
 <a id="networking-enhancements"></a>
 ## Networking Enhancements
+
 <a id="api-for-xml-processing-jaxp-16-enhancement"></a>
 ## API for XML processing (JAXP) 1.6 Enhancement
+
 <a id="java-virtual-machine-enhancements"></a>
 ## Java Virtual Machine Enhancements
+
 <a id="java-mission-control-53"></a>
 ## Java Mission Control 5.3
+
 <a id="internationalization-enhancements"></a>
 ## Internationalization Enhancements
+
 <a id="adoption-of-unicode-cldr"></a>
 ## Adoption of Unicode CLDR
+
 <a id="new-calendar-and-locale-apis"></a>
 ## New Calendar and Locale APIs
+
 <a id="version-enhancements"></a>
 ## Version Enhancements
