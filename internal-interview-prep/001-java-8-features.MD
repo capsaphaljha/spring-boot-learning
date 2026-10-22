@@ -509,14 +509,72 @@ public class ForEachListDemo {
 
 <a id="nashorn-javascript-engine"></a>
 ## Nashorn JavaScript Engine
-
+- Nashorn was introduced in Java 8 as a high-performance lightweight JavaScript engine to replace Rhino. It allowed developers to execute JavaScript code dynamically from within Java applications. However, due to the evolution of tools like GraalVM and Node.js, Nashorn was deprecated in Java 11 and completely removed in Java 15.
 
 <a id="parallel-array-sorting"></a>
 ## Parallel Array Sorting
+- Parallel Array Sorting (Arrays.parallelSort()) introduced in Java 8 allows large arrays to be sorted concurrently by leveraging the Fork/Join framework. Instead of using a single thread like traditional Arrays.sort(), it splits the array into sub-arrays, sorts them on multiple CPU cores in parallel, and then merges them, significantly improving performance for large data sets.
+
+```java
+import java.util.Arrays;
+
+public class ParallelSortExample {
+    public static void main(String[] args) {
+        
+        // 1. Ek bada array banate hain
+        int[] numbers = {58, 12, 85, 36, 91, 7, 42, 63, 19, 74};
+
+        // 2. Parallel Sort ka use karna
+        // Yeh automatically available CPU cores ka use karega sorting ke liye
+        Arrays.parallelSort(numbers);
+
+        // 3. Result print karna
+        System.out.println("Sorted Array using Parallel Sort:");
+        System.out.println(Arrays.toString(numbers)); 
+        // Output: [7, 12, 19, 36, 42, 58, 63, 74, 85, 91]
+    }
+}
+```
 
 
 <a id="concurrency-enhancements"></a>
 ## Concurrency Enhancements
+Java 8 brought significant concurrency enhancements, most notably the CompletableFuture API for writing non-blocking, composable asynchronous code. It also introduced StampedLock, which supports optimistic reading for better performance in read-heavy scenarios, and high-performance atomic alternatives like LongAdder to handle heavy thread contention efficiently compared to traditional AtomicLong.
+
+```java
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
+public class CompletableFutureExample {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
+        
+        // 1. Asynchronous task start karna (supplyAsync ek alag thread pool mein run hota hai)
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                // Simulating some background work (e.g., database or API call)
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Magento Backend";
+        })
+        
+        // 2. thenApply() ka use karke result ko transform karna ( chaining )
+        .thenApply(result -> {
+            return "Transitioning from " + result + " to Java Spring Boot!";
+        });
+
+        // Main thread apna doosra kaam kar sakta hai...
+        System.out.println("Main thread is free while background task runs...");
+
+        // 3. get() method se final result lena (Blocking call for the main thread here)
+        String finalResult = future.get();
+        
+        System.out.println(finalResult); 
+        // Output: Transitioning from Magento Backend to Java Spring Boot!
+    }
+}
+```
 
 
 <a id="jdbc-enhancements"></a>
