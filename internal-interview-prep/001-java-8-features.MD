@@ -718,19 +718,97 @@ public class CompletableFutureExample {
 <a id="jdbc-enhancements"></a>
 ## JDBC Enhancements
 
+Java 8 introduced JDBC 4.2 enhancements, most notably native support for the new java.time API. This allows developers to seamlessly map modern date and time types—such as LocalDate, LocalTime, and LocalDateTime—directly to SQL columns using standard setObject() and getObject() methods, eliminating the need for legacy java.sql.Date conversions. It also added standardized support for REF_CURSOR in stored procedures and the JDBCType enum for better type safety.
+
+```java
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.LocalDate;
+
+public class JDBCJava8Example {
+    public static void main(String[] args) {
+        
+        String url = "jdbc:postgresql://localhost:5432/mydb";
+        String user = "postgres";
+        String password = "password";
+
+        // 1. Java 8 LocalDate object banana
+        LocalDate joiningDate = LocalDate.now();
+
+        String sql = "INSERT INTO employees (name, joining_date) VALUES (?, ?)";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, "Aman");
+            
+            // 2. JDBC 4.2 enhancement: Seedha LocalDate object pass karna setObject() mein
+            pstmt.setObject(2, joiningDate); 
+
+            int rowsInserted = pstmt.executeUpdate();
+            if (rowsInserted > 0) {
+                System.out.println("A new employee was inserted successfully with Java 8 LocalDate!");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
 
 <a id="string-joiner"></a>
 ## String Joiner
+- StringJoiner is a utility class introduced in Java 8 that allows developers to construct a sequence of characters separated by a specified delimiter, with optional prefix and suffix enclosures. It eliminates the boilerplate logic of handling trailing delimiters manually when concatenating strings and integrates seamlessly with the Stream API via Collectors.joining().
 
+```java
+import java.util.StringJoiner;
+import java.util.List;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class StringJoinerExample {
+    public static void main(String[] args) {
+        
+        // 1. StringJoiner ka direct use:
+        // Parameters: delimiter, prefix, suffix
+        StringJoiner joiner = new StringJoiner(", ", "[", "]");
+        
+        joiner.add("Apple");
+        joiner.add("Banana");
+        joiner.add("Cherry");
+        
+        System.out.println("Direct StringJoiner: " + joiner.toString()); 
+        // Output: [Apple, Banana, Cherry]
+
+        // 2. Stream API ke sath use (Collectors.joining)
+        // Real-world applications mein hum aksar stream ke andar ise use karte hain
+        List<String> techStack = Arrays.asList("Java", "Spring Boot", "PostgreSQL", "Magento");
+
+        String combinedTech = techStack.stream()
+            .collect(Collectors.joining(" | ", "Skills: [", "]"));
+
+        System.out.println("Stream Joining: " + combinedTech); 
+        // Output: Skills: [Java | Spring Boot | PostgreSQL | Magento]
+    }
+}
+```
+- StringJoiner delimiter, prefix, aur suffix ko handle karne ke liye sabse cleanest tareeqa hai.
+- Stream API mein agar aapko collections ko join karna ho, toh Collectors.joining(delimiter, prefix, suffix) best choice hai.
 
 <a id="security-enhancements"></a>
 ## Security Enhancements
+
 
 <a id="tools-enhancements"></a>
 ## Tools Enhancements
 
 <a id="pack200-enhancements"></a>
 ## Pack200 Enhancements
+Pack200 was a network compression tool designed to shrink the size of JAR files for efficient downloading. In Java 8, Pack200 was enhanced to support the new class file formats and attributes introduced by Java 8 features like lambda expressions and default methods. However, with the rise of modern modular Java and build tools, Pack200 became obsolete, was deprecated in Java 11, and completely removed in Java 14.
 
 <a id="networking-enhancements"></a>
 ## Networking Enhancements
