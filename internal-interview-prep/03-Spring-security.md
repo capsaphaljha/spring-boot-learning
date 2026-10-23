@@ -117,4 +117,10 @@ Authorized Request: Jab bhi user koi protected API (jaise /api/profile) call kar
 
 Validation: Server token ka signature check karta hai, dekhta hai ki token expire toh nahi hua, aur user ko data de deta hai. Server ko database mein session save karne ki koi zaroorat nahi padti (Stateless).
 
+--
 
+# Role base 
+
+- Yes, Spring Security provides native support for Role-Based Access Control (RBAC) using GrantedAuthority and annotations like @PreAuthorize.
+- However, when using stateless JWT authentication, we customize the flow by embedding the user's roles inside the JWT payload (claims) on login.
+- During subsequent requests, our custom filter extracts those roles, converts them into GrantedAuthority objects, and populates the SecurityContext, allowing Spring Security to seamlessly enforce role-based access rules at the URL or method level.
