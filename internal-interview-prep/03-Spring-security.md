@@ -67,4 +67,54 @@ The Filter Chain
 
 ## JWT (JSON Web Token) - Stateless JWT Authentication
 
+JWT (JSON Web Token) is a compact, URL-safe means of representing claims to be transferred between two parties. 
+Because it is digitally signed and self-contained, the server can authenticate requests statelessly without querying the database for session data on every request.
+
+spring boot - Java JWT  library (jjwt)
+
+```java
+Jwts.builder()
+                .setSubject(username) // User ka naam/email daala
+                .setIssuedAt(new Date(System.currentTimeMillis())) // Aaj ka time
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 ghante baad expire hoga
+                .signWith(getSignKey(), SignatureAlgorithm.HS256) // Secret key se sign kiya
+                .compact();
+
+```
+
+
+
+
+3 Parts - secret key: 
+
+Header . Payload . Signature
+
+Example 
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbWFuQGV4YW1wbGUuY29tIiwiaWF0IjoxNzM1NzA0MDAwLCJleHAiOjE3MzU3MDc2MDB9.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+base64 encrypted
+
+{
+  "sub": "aman@example.com",
+  "iat": 1735704000,
+  "exp": 1735707600
+}
+
+
+- sub: Subject (User ka email/username)
+- iat: Issued At (Kab token bana)
+- exp: Expiration Time (Token kab expire hoga)
+
+JWT Authentication ka Poora Flow
+Login: User apna username aur password /api/login par bhejta hai.
+
+Verification: Server database mein check karta hai. Agar details sahi hain, toh server ek JWT token generate karta hai aur user ko waping bhej deta hai.
+
+Storing: Client (Frontend/React/Postman) us token ko LocalStorage ya SessionStorage mein save kar leta hai.
+
+Authorized Request: Jab bhi user koi protected API (jaise /api/profile) call karta hai, toh woh request ke headers mein token bhejta hai:Authorization: Bearer <JWT_TOKEN>
+
+Validation: Server token ka signature check karta hai, dekhta hai ki token expire toh nahi hua, aur user ko data de deta hai. Server ko database mein session save karne ki koi zaroorat nahi padti (Stateless).
+
 
