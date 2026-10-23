@@ -13,7 +13,10 @@
 MVCC (Multi-Version Concurrency Control): If any user reading database so it will not block the update and delete operations.
 ACID Complianc - (Atomicity, Consistency, Isolation, Durability
 
-(Atomicity, Consistency, Isolation, Durability
+### Atomicity - All or Nothing - Managed via COMMIT and ROLLBACK commands.
+### Consistency - Valid State to Valid State - . The database must follow all pre-defined rules.
+### Isolation - Invisible Intermediate States -  Concurrent transactions run without interfering with each other. - Row-level locks, MVCC
+### Durability - Permanent Once Committed - Data changes survive power outages or server crashes.
 --- 
 - Foreign Keys:
 
@@ -56,3 +59,24 @@ BRIN (Block Range Index): Bahut badi tables (millions of rows) jahan data sequen
 
 # Extensibility (Custom Functions & Types)
 PostgreSQL ko "Object-Relational" database kaha jata hai kyunki yeh aapko khud ke custom data types, custom operators, aur functions banane ki azaadi deta hai. Aap database ke andar hi SQL ke alawa PL/pgSQL, Python, ya C jaisi languages mein functions likh kar complex business logic run kar sakte hain.
+
+-- 
+
+BEGIN TRANSACTION;
+
+-- 1. Deduct money from Account A
+UPDATE Accounts 
+SET balance = balance - 500 
+WHERE account_id = 'A';
+
+-- 2. Add money to Account B
+UPDATE Accounts 
+SET balance = balance + 500 
+WHERE account_id = 'B';
+
+-- If both steps succeed, save permanently
+COMMIT;
+
+-- If any step fails (e.g., Account B doesn't exist), undo everything
+-- ROLLBACK; 
+
