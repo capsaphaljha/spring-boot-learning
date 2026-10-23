@@ -126,24 +126,57 @@ Plan Old Java Object (geter seter enitity class)
 "@RequestMapping(""/customer"") - CLASS
 @GetMapping(""/getDAta"") - METHOD"	path - customer/getData
 
-###
-###
-###
-###
-###
-###
-###
-###
-###
-###
-###
-###
-###
-###
-###
+### @Autowiring
+- Is the way to call the object without create object using traditional method, this annotation will do it itself.
 
-#
-#
-#
-#
-#
+### Inversion of Control\
+- Inversion of Control is a design principle where the control of object creation and lifecycle is transferred from the application code to a container (the Spring IoC Container). Instead of a class creating its dependencies using new, the container injects them.
+
+### Dependency Injection
+- Dependency Injection is the actual mechanism used to implement IoC. It allows dependent objects to be passed into a class (via constructors, setters, or fields) rather than the class constructing them internally.
+
+### Spring Bean
+- A Spring Bean is simply an object that is instantiated, assembled, and managed by the Spring IoC Container. Beans are annotated with stereotypic annotations like @Component, @Service, @Repository, or @Bean, and the container handles their entire lifecycle.
+
+
+### AOP (Aspect-Oriented Programming)
+- AOP is a programming paradigm that allows developers to modularize Cross-Cutting Concerns—functionality that spans multiple layers of an application, such as security, logging, transaction management, and performance monitoring—without cluttering the core business logic.
+
+### Spring Data JPA
+- Spring Data JPA is an abstraction layer built on top of JPA. It significantly reduces boilerplate data-access code by providing ready-to-use repository interfaces like JpaRepository, supporting built-in pagination, and automatically generating SQL queries based on method name conventions.
+
+### Spring Security Filter Chain
+- The Spring Security Filter Chain is a sequence of servlet filters that intercepts every incoming HTTP request. Each filter in the chain performs a specific security task—such as CSRF protection, session management, or validating a custom JWT token—before passing the request to the next filter or controller.
+
+### "HikariCP 
+- is a high-performance, lightweight JDBC connection pool that comes as the default connection manager in Spring Boot. It minimizes the overhead of opening and closing database connections by maintaining a pool of active, reusable connections ready to serve incoming requests instantly.
+
+### Spring Boot Actuator
+- Spring Boot Actuator is a sub-project that brings production-ready monitoring and management features to your application. It exposes built-in HTTP endpoints (such as /health, /metrics, and /env) that allow developers to inspect application health, memory usage, and database connectivity in real-time.
+
+### Lombok Library
+- Project Lombok is a Java library that plugs into your build tool and editor to automatically generate boilerplate code through annotations. Annotations like @Getter, @Setter, @ToString, and @Data reduce code verbosity by auto-generating accessors, constructors, and utility methods at compile time.
+
+### Mockito
+For mock the classes for testing
+
+### Log
+Log Back
+SLF 4J 
+
+### external api calling 
+Rest template
+
+### bean
+banane k liye hamne ye 3 annotation abou tak use kiya hai	
+
+"Component
+Controller
+rest controller"
+
+
+### Cron
+@schedules annotation
+
+
+###
