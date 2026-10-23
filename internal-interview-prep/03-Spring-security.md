@@ -53,6 +53,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 ```
 
 
+Key Interview Points to Remember:
+Stateless vs Stateful: Spring Security by default HttpSession use karti hai (Stateful). JWT ke sath humein configuration mein session policy ko SessionCreationPolicy.STATELESS set karna padta hai taaki server koi session store na kare.
+
+Password Encoding: Kabhi bhi plain text passwords database mein store nahi kiye jaate; hamesha BCryptPasswordEncoder ka use kiya jata hai.
+
 ## Spring Security
 The Filter Chain
 
