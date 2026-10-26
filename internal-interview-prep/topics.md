@@ -8,3 +8,8 @@
 ## Restfull API
 ## Auth
 ## Postgre SQL
+## xdebug - java
+## resttemplate deprecated -> rest client
+## spring batch
+## caching - reddis
+## store processor
