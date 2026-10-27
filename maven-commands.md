@@ -9,11 +9,17 @@
 ## commads
 
 
-### creating a target folder:
+### run application from CLI:
+
 ```cmd
+mvnw spring-boot:run
+```
 
+
+### creating a target folder:
+
+```cmd
 mvn clean install
-
 ```
 
 
