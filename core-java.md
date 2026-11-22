@@ -30,11 +30,89 @@ it occurs when we have many classes that are related to each other by inheritanc
 - Runtime Polymorphism (Dynamic Binding / Late Binding) : 
 
 
+## super Keyword
+The super keyword is used to refer to the parent class of a subclass.
+The most common use of the super keyword is to eliminate the confusion between superclasses and subclasses that have methods with the same name.
 
-##
+
+```java
+
+class Animal {
+  public void animalSound() {
+    System.out.println("The animal makes a sound");
+  }
+}
+
+class Dog extends Animal {
+  public void animalSound() {
+    super.animalSound(); // Call the parent method using super keyword
+    System.out.println("The dog says: bow wow");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Dog myDog = new Dog();
+    myDog.animalSound();
+  }
+}
+```
+
+### Access Parent Attributes
+
+```java
+
+class Animal {
+  String type = "Animal";
+}
+
+class Dog extends Animal {
+  String type = "Dog";
+
+  public void printType() {
+    System.out.println(super.type); // Access parent attribute
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Dog myDog = new Dog();
+    myDog.printType();
+  }
+}
+
+```
+
+### Call Parent Constructor
+
+```java
+
+class Animal {
+  Animal() {
+    System.out.println("Animal is created");
+  }
+}
+
+class Dog extends Animal {
+  Dog() {
+    super(); // Call parent constructor
+    System.out.println("Dog is created");
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Dog myDog = new Dog();
+  }
+}
+
+```
 
 
-##
+## 
+
+
+
 
 ##
 
