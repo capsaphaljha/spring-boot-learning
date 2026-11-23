@@ -364,10 +364,67 @@ public class Main {
 
 
 
-## 
+## Enums 
+- An enum is a special "class" that represents a group of constants (unchangeable variables, like final variables).
+
+```java
+public class Main {
+  enum Level {
+    LOW,
+    MEDIUM,
+    HIGH
+  }
+
+  public static void main(String[] args) {
+    Level myVar = Level.MEDIUM; 
+    System.out.println(myVar);
+  }
+}
+```
+Enum is short for "enumerations", which means "specifically listed".
+
+- Difference between Enums and Classes
+- An enum can, just like a class, have attributes and methods. The only difference is that enum constants are public, static and final (unchangeable - cannot be overridden).
+- An enum cannot be used to create objects, and it cannot extend other classes (but it can implement interfaces).
+
+Why And When To Use Enums?
+Use enums when you have values that you know aren't going to change, like month days, days, colors, deck of cards, etc.
 
 
-##
+## Enum Constructor
+An enum can also have a constructor just like a class.
+The constructor is called automatically when the constants are created. You cannot call it yourself.
+
+```java
+
+enum Level {
+  // Enum constants (each has its own description)
+  LOW("Low level"),
+  MEDIUM("Medium level"),
+  HIGH("High level");
+
+  // Field (variable) to store the description text
+  private String description;
+
+  // Constructor (runs once for each constant above)
+  private Level(String description) {
+    this.description = description;
+  }
+
+  // Getter method to read the description
+  public String getDescription() {
+    return description;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Level myVar = Level.MEDIUM; // Pick one enum constant
+    System.out.println(myVar.getDescription()); // Prints "Medium level"
+  }
+}
+
+```
 
 ##
 
