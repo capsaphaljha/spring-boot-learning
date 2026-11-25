@@ -112,4 +112,66 @@ public class DSACheatSheet {
  Big-O Notation ek mathematical tareeka hai jo yeh batata hai ki jab input data (n) bahut bada ho jaaye, toh aapka code kitna time (Time Complexity) aur kitni memory (Space Complexity) lega.
 ```
 
+# Collections Framework
+
+-  Collections Framework provides a set of interfaces (like List, Set, and Map) and a set of classes (ArrayList, HashSet, HashMap, etc.) that implement those interfaces.
+-  All of these are part of the java.util package.
+-  They are used to store, search, sort, and organize data more easily - all using standardized methods and patterns.
+
+Core Interfaces in the Collections Framework
+Here are some common interfaces, along with their classes:
+
+Interface	Common Classes	Description
+List	ArrayList, LinkedList	Ordered collection that allows duplicates
+Set	HashSet, TreeSet, LinkedHashSet	Collection of unique elements
+Map	HashMap, TreeMap, LinkedHashMap	Stores key-value pairs with unique keys
+
+The table below gives an overview of the common data structure classes and their characteristics:
+
+<img width="1277" height="535" alt="image" src="https://github.com/user-attachments/assets/dda849e4-df64-41a0-bd9d-e585df437285" />
+
+
+## List Interface
+
+- represents an ordered collection of elements.
+
+Since List is an interface, you cannot create a List object directly.
+
+Instead, you use a class that implements the List interface, such as:
+
+ArrayList - like a resizable array with fast random access
+LinkedList - like a train of cars you can easily attach or remove
+
+
+
+# Iterator
+An Iterator is an object that can be used to loop through collections, like ArrayList and HashSet.
+
+It is called an "iterator" because "iterating" is the technical term for looping.
+
+To use an Iterator, you must import it from the java.util package.
+
+```java
+// Import the ArrayList class and the Iterator class
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Main {
+  public static void main(String[] args) {
+
+    // Make a collection
+    ArrayList<String> cars = new ArrayList<String>();
+    cars.add("Volvo");
+    cars.add("BMW");
+    cars.add("Ford");
+    cars.add("Mazda");
+
+    // Get the iterator
+    Iterator<String> it = cars.iterator();
+
+    // Print the first item
+    System.out.println(it.next());
+  }
+}
+```
 
