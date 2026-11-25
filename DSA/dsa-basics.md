@@ -173,5 +173,11 @@ public class Main {
     System.out.println(it.next());
   }
 }
+------------
+while(it.hasNext()) {
+  System.out.println(it.next());
+}
+
 ```
+
 
