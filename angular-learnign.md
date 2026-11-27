@@ -34,6 +34,16 @@ Java developers transitioning to or collaborating on the frontend find Angular f
 • Built-in Dependency Injection (DI): Spring Boot is built around Inversion of Control (IoC) and Dependency Injection. Angular is the only major frontend framework with a native, hierarchical DI system built in, allowing developers to inject services into components the exact same way they inject repositories into Spring services.
 • Consistent Mental Model: Because both frontend and backend follow OOP and modular patterns, full-stack Java/Angular teams can switch between layers without changing how they structure code.
 
+# Why Enterprises Favor Angular Over React
+
+| Feature | Angular (Full Framework) | React (UI Library) | Enterprise Impact |
+| :--- | :--- | :--- | :--- |
+| **Architecture & Structure** | **Opinionated:** Enforces a standard folder layout, CLI, and coding patterns across all apps. | **Flexible:** Teams must choose their own folder structure and state patterns. | New developers can join any Angular project and immediately understand where everything lives. |
+| **Core Tooling** | **Batteries-included:** Routing, HTTP client, form validation, and testing tools come built in. | **Ecosystem-dependent:** Requires picking and maintaining third-party libraries (e.g., React Router, Axios, Redux). | Eliminates "decision fatigue" and prevents third-party library abandonment over a 5–10 year lifespan. |
+| **Upgrades & Maintenance** | Synchronized major releases every 6 months with automated migration tools (`ng update`). | Core library updates are smooth, but third-party ecosystem packages often break or fall out of sync. | Predictable long-term maintenance and security patching for large enterprise systems. |
+| **Complex Forms & Data** | Built-in **Reactive Forms** and **RxJS** for handling heavy data streams, complex validation, and real-time updates. | Requires external libraries (like React Hook Form + Zod + TanStack Query) to match the same capabilities. | Banking, insurance, and ERP apps rely heavily on massive, multi-step forms where Angular excels out of the box. |
+
+
 
 ## Start with the first program
 
