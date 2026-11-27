@@ -53,5 +53,13 @@ Java developers transitioning to or collaborating on the frontend find Angular f
   ng new auth-app
   ```
 
-  - now for features we have to build the components like modular syster
+- run the project
+
+```cmd
+ng serve --open
+```
+
+
+
+  - Now for features we have to build the components like modular system
 
