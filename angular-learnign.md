@@ -47,5 +47,11 @@ Java developers transitioning to or collaborating on the frontend find Angular f
 
 ## Start with the first program
 
-- 
+- lets build a project first:
+
+  ```cmd
+  ng new auth-app
+  ```
+
+  - now for features we have to build the components like modular syster
 
