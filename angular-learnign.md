@@ -59,7 +59,21 @@ Java developers transitioning to or collaborating on the frontend find Angular f
 ng serve --open
 ```
 
+### Now for features we have to build the components like modular system, command for creating auth component, this is custom component we are creating:
+```cmd
+ng generate component auth
+
+```
+this is a short command of this: "ng g c"
+
+This will create a new custom module name "auth"
+
+What just happened?
+Angular created a folder src/app/terms/ with 4 files inside it:
+• terms.component.html → Your HTML layout (what the user sees)
+• terms.component.css → Your styling for this page
+• terms.component.ts → The TypeScript class that controls this page
+• terms.component.spec.ts → Automated tests (we can ignore this for now)
 
 
-  - Now for features we have to build the components like modular system
-
+ 
